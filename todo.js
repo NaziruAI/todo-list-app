@@ -1,5 +1,6 @@
 const form = document.querySelector('form');
 const input = document.querySelector('input');
+const inputValue = input.value.trim();
 const ul = document.querySelector('ul');
 
 
@@ -10,7 +11,7 @@ form.addEventListener('submit', (e) => {
 });
 
 let formValidation = () => {
-    if(input.value === ''){
+    if(input.value == ''){
         alert('Task should not be blank');
         console.log('failure');
     }
@@ -28,12 +29,14 @@ let acceptTask = () => {
     createTask();
 }
 
-const h3 = document.querySelector('h3');
 
  let createTask = () => {
     ul.innerHTML += `
-    <li id='task'>
-        <p>${task.text}</p>
+    <li id='task'>git 
+        <div>
+            <input type ="checkbox" onchange="asCompleted(this)" />
+            <span>${task.text}</span>
+        </div>
         <soan class='icons'>
             <i onclick="editTask(this)" class='fas fa-edit'></i>
             <i onclick="deleteTask(this)" class='fas fa-trash-alt'></i>
@@ -50,8 +53,14 @@ let deleteTask = (e) => {
 };
 
 let editTask = (e) => {
-    input.value = e.parentElement.previousElementSibling.innerHTML;
+    input.value = e.parentElement.previousElementSibling.innerText;
     e.parentElement.parentElement.remove();
+    saveToLocalStorage();
+}
+
+let asCompleted = (checkbox) => {
+    const markedCompleted = checkbox.nextElementSibling;
+    markedCompleted.classList.toggle('completed', checkbox.checked);
     saveToLocalStorage();
 }
 

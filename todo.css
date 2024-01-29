@@ -55,10 +55,13 @@ button{
 ul{
     margin-top: 20px;
 }
-ul li{
+li{
     display: flex;
     justify-content: space-between;
     width: 400px;
     list-style: none;
     margin: 20px 10px;
+}
+.completed{
+    text-decoration: line-through;
 }

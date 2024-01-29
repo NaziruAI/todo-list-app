@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-List-App</title>
+    <style>
+        ul{
+            list-style: none;
+        }
+        .completed{
+            text-decoration: line-through;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List App</h1>
+    <input type="text" placeholder="Add Task">
+    <button onclick="addItem()">Add item</button>
+    <ul></ul></ul>
+
+    <script>
+            const input = document.querySelector('input');
+            const ul = document.querySelector('ul')
+
+            // function to add item
+        function addItem(){
+            // getting input value
+            const inputValue = input.value.trim();
+            // check if the imput not empty
+            if(inputValue !== ''){
+                // creating li element
+                ul.innerHTML += `
+                    <li>
+                        <input type='checkbox' onchange='asCompleted(this)'/>
+                        <span>${inputValue}</span>
+                        <button onclick='editItem(this)'>Edit</button>
+                        <button onclick='deleteItem(this)'>Delete</button>
+                    </li>
+                    `
+            
+            }
+            // clear the input value
+            input.value = ''; 
+            saveToLocalStorage();
+        }
+
+        // function to mark task as completed
+        function asCompleted(checkbox){
+            const taskCompleted = checkbox.nextElementSibling;
+            // creating class for styling
+            taskCompleted.classList.toggle('completed', checkbox.checked)
+            saveToLocalStorage();
+        }
+
+        // function to delete task in the list
+        function deleteItem(button){
+            const liElement = button.parentElement;
+            const ulElement = liElement.parentElement;
+            ulElement.removeChild(liElement);
+            saveToLocalStorage();
+        }
+
+        // function to edit tha task
+        function editItem(button){
+            input.value = button.previousElementSibling.innerHTML;
+            const liElement = button.parentNode;
+            const ulElement = liElement.parentNode;
+            ulElement.removeChild(liElement);
+            saveToLocalStorage();
+        }  
+
+        function saveToLocalStorage(){
+            localStorage.setItem('tasks', ul.innerHTML)
+        }
+
+        function readLocalStorage(){
+            ul.innerHTML = localStorage.getItem('tasks');
+        }
+
+        readLocalStorage();
+    </script>
+    
+</body>
+</html>
