@@ -32,7 +32,7 @@ let acceptTask = () => {
 
  let createTask = () => {
     ul.innerHTML += `
-    <li id='task'>git 
+    <li id='task'>
         <div>
             <input type ="checkbox" onchange="asCompleted(this)" />
             <span>${task.text}</span>
@@ -58,9 +58,11 @@ let editTask = (e) => {
     saveToLocalStorage();
 }
 
-let asCompleted = (checkbox) => {
-    const markedCompleted = checkbox.nextElementSibling;
-    markedCompleted.classList.toggle('completed', checkbox.checked);
+      // function to mark task as completed
+    function asCompleted(checkbox){
+    const taskCompleted = checkbox.nextElementSibling;
+    // creating class for styling
+    taskCompleted.classList.toggle('completed', checkbox.checked)
     saveToLocalStorage();
 }
 

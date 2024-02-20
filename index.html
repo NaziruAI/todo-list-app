@@ -5,9 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo-List-App</title>
     <style>
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: bolder;
+            background-color: rgb(77, 108, 200);
+        }
+        .container{
+            width: 34%;
+            background-color: aliceblue;
+            margin: 5rem auto;
+            padding: 1rem;
+            /* text-align: center; */
+            border-radius: 1rem;
+        }
+        h1{
+            font-size: 250%;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+        .input{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem ;
+        }
+
+        input{
+            flex: 1;
+            outline: 0;
+            border: 0;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            background-color: rgb(175, 208, 171);
+            margin-right: 5px;
+        }
+
+        .add{
+            outline: 0;
+            border: 0;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            background-color: rgb(34, 135, 21);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: ;
+
+        }
+
+
         ul{
             list-style: none;
+            /* background-color: gray; */
         }
+       
+        li{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            background-color: gray;
+        }
+        
+
         .completed{
             text-decoration: line-through;
             cursor: pointer;
@@ -15,10 +76,15 @@
     </style>
 </head>
 <body>
-    <h1>Todo List App</h1>
-    <input type="text" placeholder="Add Task">
-    <button onclick="addItem()">Add item</button>
-    <ul></ul></ul>
+    <div class="container">
+        <h1>Todo List App</h1>
+        <div class="input">
+            <input type="text" placeholder="Task Name">
+            <button class="add" onclick="addItem()">Add Task</button>
+        </div>
+        <ul></ul>
+    </div>
+    
 
     <script>
             const input = document.querySelector('input');
@@ -33,17 +99,17 @@
                 // creating li element
                 ul.innerHTML += `
                     <li>
-                        <input type='checkbox' onchange='asCompleted(this)'/>
-                        <span>${inputValue}</span>
-                        <button onclick='editItem(this)'>Edit</button>
-                        <button onclick='deleteItem(this)'>Delete</button>
+                            <input type='checkbox' onchange='asCompleted(this)'/>
+                            <span>${inputValue}</span>
+                            <button onclick='editItem(this)'>Edit</button>
+                            <button onclick='deleteItem(this)'>Delete</button>
                     </li>
                     `
-            
             }
             // clear the input value
             input.value = ''; 
             saveToLocalStorage();
+
         }
 
         // function to mark task as completed
@@ -73,12 +139,12 @@
 
         function saveToLocalStorage(){
             localStorage.setItem('tasks', ul.innerHTML)
+
         }
 
         function readLocalStorage(){
             ul.innerHTML = localStorage.getItem('tasks');
         }
-
         readLocalStorage();
     </script>
     
