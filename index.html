@@ -3,77 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Todo-List-App</title>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-weight: bolder;
-            background-color: rgb(77, 108, 200);
-        }
-        .container{
-            width: 34%;
-            background-color: aliceblue;
-            margin: 5rem auto;
-            padding: 1rem;
-            /* text-align: center; */
-            border-radius: 1rem;
-        }
-        h1{
-            font-size: 250%;
-            text-align: center;
-            text-transform: uppercase;
-            text-decoration: underline;
-        }
-        .input{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 2rem ;
-        }
-
-        input{
-            flex: 1;
-            outline: 0;
-            border: 0;
-            border-radius: 1.5rem;
-            padding: 1rem;
-            background-color: rgb(175, 208, 171);
-            margin-right: 5px;
-        }
-
-        .add{
-            outline: 0;
-            border: 0;
-            border-radius: 1.5rem;
-            padding: 1rem;
-            background-color: rgb(34, 135, 21);
-            color: #fff;
-            font-size: 1rem;
-            font-weight: ;
-
-        }
-
-
-        ul{
-            list-style: none;
-            /* background-color: gray; */
-        }
-       
-        li{
-            width: 100%;
-            display: flex;
-            justify-content: flex-start;
-            background-color: gray;
-        }
-        
-
-        .completed{
-            text-decoration: line-through;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -86,66 +17,7 @@
     </div>
     
 
-    <script>
-            const input = document.querySelector('input');
-            const ul = document.querySelector('ul')
-
-            // function to add item
-        function addItem(){
-            // getting input value
-            const inputValue = input.value.trim();
-            // check if the imput not empty
-            if(inputValue !== ''){
-                // creating li element
-                ul.innerHTML += `
-                    <li>
-                            <input type='checkbox' onchange='asCompleted(this)'/>
-                            <span>${inputValue}</span>
-                            <button onclick='editItem(this)'>Edit</button>
-                            <button onclick='deleteItem(this)'>Delete</button>
-                    </li>
-            }
-            // clear the input value
-            input.value = ''; 
-            saveToLocalStorage();
-
-        }
-
-        // function to mark task as completed
-        function asCompleted(checkbox){
-            const taskCompleted = checkbox.nextElementSibling;
-            // creating class for styling
-            taskCompleted.classList.toggle('completed', checkbox.checked)
-            saveToLocalStorage();
-        }
-
-        // function to delete task in the list
-        function deleteItem(button){
-            const liElement = button.parentElement;
-            const ulElement = liElement.parentElement;
-            ulElement.removeChild(liElement);
-            saveToLocalStorage();
-        }
-
-        // function to edit tha task
-        function editItem(button){
-            input.value = button.previousElementSibling.innerHTML;
-            const liElement = button.parentNode;
-            const ulElement = liElement.parentNode;
-            ulElement.removeChild(liElement);
-            saveToLocalStorage();
-        }  
-
-        function saveToLocalStorage(){
-            localStorage.setItem('tasks', ul.innerHTML)
-
-        }
-
-        function readLocalStorage(){
-            ul.innerHTML = localStorage.getItem('tasks');
-        }
-        readLocalStorage();
-    </script>
+    <script src="script.js"></script>
     
 </body>
 </html>
