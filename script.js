@@ -20,6 +20,8 @@ if(inputValue !== ''){
             </div>
         </li>
         `
+}else{
+    alert('Enter a task name to add')
 }
 // clear the input value
 input.value = ''; 
